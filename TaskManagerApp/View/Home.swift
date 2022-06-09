@@ -29,9 +29,9 @@ struct Home: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical)
-                CustomSegmentedBar()
+                customSegmentedBar()
                     .padding(.top, 5)
-                TaskView()
+                taskView()
             }
             .padding()
         }
@@ -72,22 +72,22 @@ struct Home: View {
     }
     
     @ViewBuilder
-    func TaskView() -> some View {
+    func taskView() -> some View {
         LazyVStack(spacing: 20) {
             //Custom Filtered requests view
             DynamicFilteredView(currentTab: taskModel.currentTab) { (task: Task) in
-                TaskRowView(task: task)
+                taskRowView(task: task)
             }
             
             ForEach(tasks) { task in
-                TaskRowView(task: task)
+                taskRowView(task: task)
             }
         }
         .padding(.top, 20)
     }
     
     @ViewBuilder
-    func TaskRowView(task: Task) -> some View {
+    func taskRowView(task: Task) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text(task.type ?? "")
@@ -156,7 +156,7 @@ struct Home: View {
     }
     
     @ViewBuilder
-    func CustomSegmentedBar() -> some View {
+    func customSegmentedBar() -> some View {
         let tabs = ["Today", "Upcoming", "Task Done", "Failed"]
         HStack(spacing: 10) {
             ForEach(tabs, id: \.self) { tab in
